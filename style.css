@@ -75,6 +75,25 @@ body {
     /* Caché sur desktop */
 }
 
+.logo-link {
+    text-decoration: none;
+    /* Enlève le soulignement du lien */
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    /* Ajoute un espace entre l'image et le texte */
+}
+
+
+.logo-img {
+    height: 30px;
+    width: auto;
+    /* Optionnel : si le logo est blanc sur fond transparent, le CSS est suffisant */
+}
+
 /* --- SLIDER D'ACCUEIL --- */
 .hero-slider {
     position: relative;
@@ -223,7 +242,7 @@ body {
     }
 
     .logo-name {
-        font-size: 1.2rem;
+        font-size: 1rem;
         font-weight: bold;
         color: var(--color-chêne-clair);
     }
@@ -472,5 +491,256 @@ body {
 
     .section-title {
         font-size: 2rem;
+    }
+}
+
+/* --- SÉPARATEUR PARALLAX --- */
+
+.parallax-separator {
+    /* 1. Définition de la hauteur de la section */
+    height: 400px;
+
+    /* 2. Image de fond (Remplacez le chemin par celui de votre image) */
+    background-image: url('images/paralax2.AVIF');
+
+    /* 3. L'effet Parallax : fixe l'image lors du défilement */
+    background-attachment: fixed;
+
+    /* 4. S'assure que l'image couvre toute la zone */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    /* Styles pour le contenu texte (optionnel) */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.parallax-content p {
+    color: var(--color-blanc-pur);
+    /* Texte en blanc pour un bon contraste */
+    font-size: 1rem;
+    font-weight: 700;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.6);
+    /* Pour que le texte ressorte bien */
+    padding: 20px 40px;
+    background-color: rgba(0, 0, 0, 0.3);
+    /* Légère boîte derrière le texte pour la lisibilité */
+    border-radius: 5px;
+}
+
+
+/* --- RESPONSIVE : Le Parallax et le Mobile --- */
+/* ATTENTION : L'effet 'fixed' est souvent désactivé ou buggé sur mobile pour des raisons de performance.
+   Nous devons le désactiver pour une expérience stable. */
+@media (max-width: 992px) {
+    .parallax-separator {
+        /* On retire l'effet Parallax sur les petits écrans */
+        background-attachment: scroll;
+        /* On peut réduire légèrement la hauteur sur mobile si nécessaire */
+        height: 300px;
+    }
+}
+
+/* --- SECTION NOS SERVICES (Grille de Cartes) --- */
+
+.services-section {
+    padding: 60px 5%;
+    background-color: var(--color-gris-chaud);
+    /* Utiliser le gris pour un fond neutre */
+    text-align: center;
+}
+
+.services-grid {
+    /* Utilisation de CSS Grid pour une disposition facile en colonnes */
+    display: grid;
+
+    /* 3 colonnes de taille égale sur desktop */
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    /* Espace entre les cartes */
+    margin-top: 40px;
+}
+
+.service-card {
+    background-color: var(--color-blanc-pur);
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    /* Important pour que l'image et le coin soient coupés */
+    text-align: left;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+    /* Léger soulèvement au survol */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.card-image {
+    width: 100%;
+    /* Force l'image à être carrée ou rectangulaire de même ratio pour toutes */
+    height: 220px;
+    object-fit: cover;
+    /* Recadre sans déformer, en remplissant l'espace */
+    display: block;
+}
+
+.card-content {
+    padding: 20px;
+}
+
+.card-title {
+    color: var(--color-bleu-ardoise);
+    font-size: 1.5rem;
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.card-description {
+    color: var(--color-noir-doux);
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+/* --- RESPONSIVE POUR LES SERVICES --- */
+@media (max-width: 1200px) {
+    .services-grid {
+        /* Passe à 2 colonnes sur tablette */
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .services-grid {
+        /* 1 colonne sur mobile */
+        grid-template-columns: 1fr;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* --- FOOTER PRINCIPAL --- */
+.main-footer {
+    background-color: var(--color-noir-doux);
+    /* Couleur de fond sombre pour le contraste */
+    color: var(--color-blanc-pur);
+    padding: 50px 5%;
+    font-size: 1rem;
+}
+
+.footer-grid {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+    flex-wrap: wrap;
+    /* Permet aux blocs de passer à la ligne sur mobile */
+}
+
+.footer-title {
+    color: var(--color-chêne-clair);
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+    border-bottom: 2px solid var(--color-bleu-ardoise);
+    /* Petite ligne de séparation */
+    padding-bottom: 5px;
+}
+
+/* Styles pour les coordonnées */
+.footer-contact p {
+    margin-bottom: 10px;
+}
+
+.footer-contact a {
+    color: var(--color-blanc-pur);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer-contact a:hover {
+    color: var(--color-chêne-clair);
+}
+
+.footer-icon {
+    margin-right: 10px;
+    color: var(--color-bleu-ardoise);
+}
+
+/* Styles pour la navigation */
+.footer-nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-nav li {
+    margin-bottom: 5px;
+}
+
+.footer-nav a {
+    color: var(--color-blanc-pur);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer-nav a:hover {
+    color: var(--color-chêne-clair);
+}
+
+/* Styles pour le Branding */
+.footer-branding .logo-name {
+    font-size: 1.3rem;
+}
+
+.footer-branding .logo-img {
+    height: 30px;
+    /* Assure que le logo est lisible */
+}
+
+.copyright {
+    margin-top: 20px;
+    font-size: 0.85rem;
+    opacity: 0.7;
+}
+
+/* --- RESPONSIVE FOOTER --- */
+@media (max-width: 768px) {
+    .footer-grid {
+        /* Empile les colonnes sur mobile */
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .footer-contact,
+    .footer-nav,
+    .footer-branding {
+        /* Chaque bloc prend 100% de la largeur */
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .footer-title {
+        text-align: center;
+        border-bottom: none;
+        padding-bottom: 0;
+    }
+
+    .footer-nav ul {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px 20px;
     }
 }
