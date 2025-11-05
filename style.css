@@ -1,0 +1,457 @@
+/* --- VOS COULEURS PERSONNALISÉES --- */
+:root {
+    --color-chêne-clair: #C19A6B;
+    /* CTA & Titres */
+    --color-gris-chaud: #dedddc;
+    /* Fond de sections */
+    --color-blanc-pur: #FFFFFF;
+    /* Fond principal */
+    --color-bleu-ardoise: #334155;
+    /* Navigation & Textes Forts */
+    --color-noir-doux: #1E1E1E;
+    /* Paragraphes longs */
+}
+
+/* --- GÉNÉRAL & RESET --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: sans-serif;
+    color: var(--color-noir-doux);
+    background-color: var(--color-blanc-pur);
+}
+
+/* --- EN-TÊTE --- */
+.main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 5%;
+    position: absolute;
+    width: 100%;
+    z-index: 100;
+    color: var(--color-blanc-pur);
+    background: rgba(30, 30, 30, 0.4);
+}
+
+.logo-name {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--color-chêne-clair);
+}
+
+.main-nav {
+    /* Styles pour la navigation sur desktop */
+}
+
+.nav-list {
+    list-style: none;
+    display: flex;
+}
+
+.nav-list a {
+    text-decoration: none;
+    color: var(--color-blanc-pur);
+    padding: 10px 15px;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.nav-list a:hover {
+    color: var(--color-chêne-clair);
+}
+
+.phone-number {
+    font-weight: bold;
+    color: var(--color-chêne-clair);
+}
+
+.menu-toggle {
+    display: none;
+    /* Caché sur desktop */
+}
+
+/* --- SLIDER D'ACCUEIL --- */
+.hero-slider {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.slider-container {
+    display: flex;
+    height: 100%;
+    transition: transform 0.5s ease-in-out;
+}
+
+.slide {
+    flex: 0 0 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    transition: opacity 0.5s;
+}
+
+/* Effet de superposition sombre (Augmentation à 65% pour meilleure lisibilité) */
+.slide::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.65);
+    /* Opacité augmentée */
+    z-index: 1;
+    /* Assure que le filtre est au-dessus de l'image */
+}
+
+/* Images d'arrière-plan - Remplacez par les vrais fichiers */
+.slide-1 {
+    background-image: url('images/Hero2.jpg');
+}
+
+.slide-2 {
+    background-image: url('images/Hero3.jpg');
+}
+
+.slide-content {
+    z-index: 10;
+    /* Au-dessus du filtre */
+    color: var(--color-blanc-pur);
+    max-width: 800px;
+    padding: 20px;
+    position: relative;
+    /* Nécessaire pour que z-index 10 fonctionne */
+}
+
+.main-title {
+    font-size: 3.5rem;
+    margin-bottom: 15px;
+    color: var(--color-chêne-clair);
+}
+
+.subtitle {
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+}
+
+.cta-button {
+    display: inline-block;
+    padding: 12px 30px;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 5px;
+    background-color: var(--color-chêne-clair);
+    color: var(--color-bleu-ardoise);
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.cta-button:hover {
+    filter: brightness(110%);
+    transform: translateY(-2px);
+}
+
+/* Contrôles du Slider (Flèches) */
+.slider-controls {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-50%);
+    padding: 0 20px;
+    /* Padding par défaut sur desktop */
+    z-index: 50;
+}
+
+.control-btn {
+    background: rgba(51, 65, 85, 0.5);
+    /* Bleu ardoise transparent */
+    border: none;
+    color: var(--color-blanc-pur);
+    /* Couleur des flèches */
+
+    font-size: 1.2rem;
+    padding: 6px 10px;
+
+    cursor: pointer;
+    transition: background 0.3s;
+    border-radius: 3px;
+    z-index: 51;
+}
+
+.control-btn:hover {
+    background: var(--color-bleu-ardoise);
+}
+
+.close-menu-toggle {
+    display: none;
+    /* Caché par défaut et sur desktop */
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: transparent;
+    border: none;
+    color: var(--color-blanc-pur);
+    font-size: 2rem;
+    cursor: pointer;
+    padding: 10px;
+    z-index: 10;
+}
+
+
+/* --- RESPONSIVE MOBILE (<= 768px) --- */
+@media (max-width: 768px) {
+
+    .main-nav {
+        display: none;
+    }
+
+    .contact-info {
+        display: none;
+    }
+
+    .logo-name {
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: var(--color-chêne-clair);
+    }
+
+    /* Affiche le bouton menu */
+    .menu-toggle {
+        display: block;
+        background: transparent;
+        border: none;
+        color: var(--color-blanc-pur);
+        font-size: 2rem;
+        cursor: pointer;
+    }
+
+    .main-title {
+        font-size: 2.5rem;
+    }
+
+    .subtitle {
+        font-size: 1.2rem;
+    }
+
+    .slider-controls {
+        padding: 0 3%;
+    }
+
+    .slide-content {
+        padding: 0 11%;
+    }
+
+    /* --- STYLES SPÉCIFIQUES AU MENU MOBILE (OFF-CANVAS) --- */
+    .main-nav .close-menu-toggle {
+        display: block;
+    }
+
+    .main-nav {
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 70%;
+        height: auto;
+        background-color: var(--color-bleu-ardoise);
+        padding-top: 80px;
+        box-shadow: -4px 0 10px rgba(0, 0, 0, 0.5);
+        transform: translateX(100%);
+        transition: transform 0.4s ease-in-out;
+        display: none;
+        z-index: 99;
+    }
+
+    .main-nav.active {
+        transform: translateX(0);
+        display: block;
+    }
+
+    /* Style des liens dans le menu latéral */
+    .main-nav .nav-list {
+        flex-direction: column;
+        padding: 0;
+    }
+
+    .main-nav .nav-list li {
+        margin: 0;
+    }
+
+    .main-nav .nav-list a {
+        color: var(--color-blanc-pur);
+        display: block;
+        padding: 15px 20px;
+        text-align: left;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .main-nav .nav-list a:hover {
+        background-color: var(--color-chêne-clair);
+        color: var(--color-bleu-ardoise);
+    }
+}
+
+/* --- SECTION À PROPOS --- */
+
+.about-section {
+    padding: 80px 5%;
+    background-color: var(--color-gris-chaud);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.section-title {
+    text-align: center;
+    color: var(--color-chêne-clair);
+    font-size: 2.5rem;
+    margin-bottom: 60px;
+}
+
+.about-content {
+    display: flex;
+    align-items: flex-start;
+    gap: 50px;
+}
+
+/* Bloc Visuel (Contient le wrapper de la vidéo) */
+.about-visual {
+    flex: 1;
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Nouveau : Wrapper pour la vidéo et le bouton Play */
+.video-wrapper {
+    position: relative;
+    padding-bottom: 82%;
+    /* Augmenté de 56.25% (16:9) à 65% pour une hauteur supplémentaire */
+    height: 0;
+    overflow: hidden;
+    border-radius: 10px;
+    /* Coins arrondis appliqués ici */
+    cursor: pointer;
+    /* Indique que c'est cliquable */
+}
+
+/* La balise Video elle-même */
+.artisan-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Bouton Play */
+.play-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s;
+    z-index: 2;
+    /* Au-dessus de la vidéo */
+}
+
+.play-button:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.play-button svg {
+    color: var(--color-chêne-clair);
+    /* Couleur de l'icône Play */
+    width: 30px;
+    height: 30px;
+    margin-left: 5px;
+    /* Petit décalage pour le look du triangle */
+}
+
+/* Classe pour cacher le bouton Play une fois la vidéo lancée */
+.video-wrapper.playing .play-button {
+    opacity: 0;
+    pointer-events: none;
+    /* Rendre inactif au clic */
+}
+
+/* Bloc Texte */
+.about-text {
+    flex: 1;
+    color: var(--color-noir-doux);
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+.about-text p {
+    margin-bottom: 20px;
+    padding-left: 20px;
+    border-left: 3px solid var(--color-bleu-ardoise);
+}
+
+.highlight-text {
+    font-weight: bold;
+    color: var(--color-bleu-ardoise);
+}
+
+/* Liste des Valeurs Clés */
+.key-values {
+    list-style: none;
+    padding: 0;
+    margin-top: 30px;
+}
+
+.key-values li {
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--color-bleu-ardoise);
+}
+
+.key-values .icon {
+    display: inline-block;
+    color: var(--color-chêne-clair);
+    font-size: 1.5rem;
+    margin-right: 10px;
+}
+
+/* --- RESPONSIVE POUR LA SECTION À PROPOS --- */
+@media (max-width: 992px) {
+    .about-content {
+        flex-direction: column;
+        gap: 40px;
+    }
+
+    .about-text p {
+        padding-left: 0;
+        border-left: none;
+    }
+
+    .section-title {
+        font-size: 2rem;
+    }
+}

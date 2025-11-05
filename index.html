@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menuisier Ébéniste - Création Sur Mesure</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="style.css">
+</head>
+</head>
+
+<body>
+
+    <header class="main-header">
+        <div class="logo">
+            <span class="logo-name">Woodmaker Services Marseille </span>
+        </div>
+        <nav class="main-nav">
+            <button class="close-menu-toggle">X</button>
+
+            <ul class="nav-list">
+                <li><a href="#accueil" class="active">ACCUEIL</a></li>
+                <li><a href="#a-propos">À PROPOS</a></li>
+                <li><a href="#services">NOS SERVICES</a></li>
+                <li><a href="#portfolio">PORTFOLIO</a></li>
+                <li><a href="#contact">CONTACTEZ-NOUS</a></li>
+                <li><a href="#avis">AVIS CLIENTS</a></li>
+            </ul>
+        </nav>
+        <button class="menu-toggle">☰</button>
+    </header>
+
+    <section class="hero-slider">
+        <div class="slider-container" id="sliderContainer">
+
+            <div class="slide slide-1 active" data-bg-image="images/Hero2.jpg">
+                <div class="slide-content">
+                    <h1 class="main-title">L'Art du Bois Sur Mesure</h1>
+                    <p class="subtitle">Façonner vos idées, créer votre intérieur d'exception.</p>
+                    <a href="#a-propos" class="cta-button">EN SAVOIR PLUS</a>
+                </div>
+            </div>
+
+            <div class="slide slide-2" data-bg-image="images/Hero3.jpg">
+                <div class="slide-content">
+                    <h1 class="main-title">Vos Projets, Nos Réalisations</h1>
+                    <p class="subtitle"> Découvrez notre savoir-faire au travers de nos créations uniques.</p>
+                    <a href="#portfolio" class="cta-button secondary-cta">NOS RÉALISATIONS</a>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="slider-controls">
+            <button class="control-btn prev-btn">&lt;</button>
+            <button class="control-btn next-btn">&gt;</button>
+        </div>
+    </section>
+
+    <section id="a-propos" class="about-section">
+        <div class="container">
+            <h2 class="section-title">Pourquoi Choisir Notre Atelier</h2>
+
+            <div class="about-content">
+
+                <div class="about-visual">
+                    <div class="video-wrapper">
+                        <video class="artisan-video" poster="images/video-preview.jpg" playsinline /* AJOUTÉ : Essentiel
+                            pour iOS/Safari */ preload="metadata" /* AJOUTÉ : Charge les métadonnées pour l'aperçu * />
+                        <source src="images/Woodmarker.mp4" type="video/mp4">
+                        Votre navigateur ne supporte pas la balise vidéo.
+                        </video>
+                        <div class="play-button" aria-label="Lancer la vidéo">
+                            <svg width="60" height="60" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M8 5v14l11-7z" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="about-text">
+                    <p>
+                        <span class="highlight-text">Installé à Marseille</span>, je vous accompagne dans la réalisation
+                        de tous vos projets autour du bois et de l’aménagement de la maison : menuiserie intérieure et
+                        extérieure, ébénisterie, création de meubles sur mesure, pose de cuisine, mezzanine, mais aussi
+                        travaux extérieurs comme les abris de jardin, l’élagage ou les travaux en hauteur.
+                    </p>
+
+                    <p>
+                        Passionné par mon métier et agréé, je mets un point d’honneur à offrir un travail soigné,
+                        durable et fidèle à vos attentes. J’aime travailler main dans la main avec mes clients, partager
+                        mon énergie positive et trouver, avec eux, les meilleures solutions techniques et esthétiques.
+                    </p>
+
+                    <p>
+                        Parce que chaque projet est unique, je prends le temps de vous écouter pour créer des
+                        réalisations qui vous ressemblent, dans le respect de la qualité, de la confiance et des délais.
+                    </p>
+
+                    <ul class="key-values">
+                        <li>
+                            <span class="icon">
+                                <i class="fa-solid fa-palette"></i>
+                            </span>
+                            Fabrication Sur Mesure & Artisanale
+                        </li>
+                        <li>
+                            <span class="icon">
+                                <i class="fa-solid fa-shield-halved"></i>
+                            </span>
+                            Qualité, Confiance et Respect des Délais
+                        </li>
+                        <li>
+                            <span class="icon">
+                                <i class="fa-solid fa-ruler-combined"></i>
+                            </span>
+                            Menuiserie Intérieure & Travaux Extérieurs
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
