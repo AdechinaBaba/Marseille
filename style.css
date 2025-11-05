@@ -439,11 +439,30 @@ body {
     margin-right: 10px;
 }
 
+
 /* --- RESPONSIVE POUR LA SECTION À PROPOS --- */
 @media (max-width: 992px) {
     .about-content {
         flex-direction: column;
         gap: 40px;
+    }
+
+    .about-visual {
+        /* Garde la hauteur fixe et la largeur 100% pour la compatibilité mobile */
+        height: 250px;
+        width: 100%;
+        padding-bottom: 0;
+        /* Rétablit les coins arrondis (déjà dans le style général, mais bonne pratique ici) */
+        border-radius: 10px;
+    }
+
+    .artisan-video {
+        /* Rétablit le style vidéo propre sans bordures */
+        border: none;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        /* Remet le cover pour bien remplir, car la hauteur est fixe */
     }
 
     .about-text p {

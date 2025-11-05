@@ -68,10 +68,11 @@
 
                 <div class="about-visual">
                     <div class="video-wrapper">
-                        <video class="artisan-video" poster="images/video-preview.jpg" playsinline /* AJOUTÉ : Essentiel
-                            pour iOS/Safari */ preload="metadata" /* AJOUTÉ : Charge les métadonnées pour l'aperçu * />
-                        <source src="images/Woodmarker.mp4" type="video/mp4">
-                        Votre navigateur ne supporte pas la balise vidéo.
+                        <video class="artisan-video" poster="images/video-preview.jpg" playsinline preload="metadata"
+                            autoplay muted>
+                            <source src="images/Woodmarker.webm" type="video/webm">
+                            <source src="images/Woodmarker.mp4" type="video/mp4">
+                            Votre navigateur ne supporte pas la balise vidéo.
                         </video>
                         <div class="play-button" aria-label="Lancer la vidéo">
                             <svg width="60" height="60" viewBox="0 0 24 24" fill="currentColor">
