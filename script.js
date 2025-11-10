@@ -134,4 +134,58 @@ document.addEventListener('DOMContentLoaded', () => {
             artisanVideo.load(); // Recharge la vidéo à son début (affiche l'image poster)
         });
     }
+
+    /* ========================================================= */
+    /* 4. SLIDER AVIS CLIENTS (Logique Native) */
+    /* ========================================================= */
+
+    const avisWrapper = document.querySelector('.testimonials-wrapper');
+    const nextAvisBtn = document.querySelector('.next-avis-btn');
+    const prevAvisBtn = document.querySelector('.prev-avis-btn');
+    const avisDots = document.querySelectorAll('.avis-pagination .dot');
+
+    // Logique : 12 slides / 3 slides par vue = 4 groupes (totalGroups)
+    const totalGroups = 4;
+    let currentGroup = 0;
+    const slideDuration = 10000; // 10 secondes
+
+    function updateAvisSlider() {
+        // Déplace le wrapper d'un pourcentage correspondant au groupe actuel (0%, 25%, 50%, 75%)
+        const offset = -currentGroup * (100 / totalGroups);
+        avisWrapper.style.transform = `translateX(${offset}%)`;
+
+        // Met à jour les points de pagination
+        avisDots.forEach(dot => dot.classList.remove('active'));
+        if (avisDots[currentGroup]) {
+            avisDots[currentGroup].classList.add('active');
+        }
+    }
+
+    if (avisWrapper) {
+        // Navigation Manuelle
+        nextAvisBtn.addEventListener('click', () => {
+            currentGroup = (currentGroup + 1) % totalGroups;
+            updateAvisSlider();
+        });
+
+        prevAvisBtn.addEventListener('click', () => {
+            // Logique pour s'assurer que currentGroup ne devienne pas négatif
+            currentGroup = (currentGroup - 1 + totalGroups) % totalGroups;
+            updateAvisSlider();
+        });
+
+        // Navigation Automatique
+        setInterval(() => {
+            currentGroup = (currentGroup + 1) % totalGroups;
+            updateAvisSlider();
+        }, slideDuration);
+
+        // Pagination au Clic
+        avisDots.forEach(dot => {
+            dot.addEventListener('click', (e) => {
+                currentGroup = parseInt(e.target.dataset.index);
+                updateAvisSlider();
+            });
+        });
+    }
 });
