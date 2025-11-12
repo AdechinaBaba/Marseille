@@ -136,7 +136,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /* ========================================================= */
-    /* 4. SLIDER AVIS CLIENTS (Logique Native) */
+    /* 4. SLIDER AVIS CLIENTS (Logique par Groupe) */
     /* ========================================================= */
 
     const avisWrapper = document.querySelector('.testimonials-wrapper');
@@ -144,48 +144,63 @@ document.addEventListener('DOMContentLoaded', () => {
     const prevAvisBtn = document.querySelector('.prev-avis-btn');
     const avisDots = document.querySelectorAll('.avis-pagination .dot');
 
-    // Logique : 12 slides / 3 slides par vue = 4 groupes (totalGroups)
-    const totalGroups = 4;
-    let currentGroup = 0;
-    const slideDuration = 10000; // 10 secondes
+    const totalGroups = 4; // Nous avons maintenant 4 groupes fixes.
+    let currentGroup = 0; // L'index va de 0 à 3.
+    const slideDuration = 10000;
+    let autoSlideInterval;
 
     function updateAvisSlider() {
-        // Déplace le wrapper d'un pourcentage correspondant au groupe actuel (0%, 25%, 50%, 75%)
+        // Le décalage est toujours 0%, -25%, -50%, -75% quel que soit l'écran.
         const offset = -currentGroup * (100 / totalGroups);
         avisWrapper.style.transform = `translateX(${offset}%)`;
 
-        // Met à jour les points de pagination
+        // Met à jour les points de pagination (maintenant direct)
         avisDots.forEach(dot => dot.classList.remove('active'));
         if (avisDots[currentGroup]) {
             avisDots[currentGroup].classList.add('active');
         }
     }
 
+    function startAutoSlide() {
+        clearInterval(autoSlideInterval);
+        autoSlideInterval = setInterval(() => {
+            currentGroup = (currentGroup + 1) % totalGroups;
+            updateAvisSlider();
+        }, slideDuration);
+    }
+
+
     if (avisWrapper) {
+        // Le redimensionnement n'a plus besoin de logique complexe, le CSS gère l'affichage.
+        window.addEventListener('resize', () => {
+            updateAvisSlider(); // S'assure de l'alignement
+            startAutoSlide();
+        });
+
+        updateAvisSlider();
+        startAutoSlide();
+
         // Navigation Manuelle
         nextAvisBtn.addEventListener('click', () => {
             currentGroup = (currentGroup + 1) % totalGroups;
             updateAvisSlider();
+            startAutoSlide();
         });
 
         prevAvisBtn.addEventListener('click', () => {
-            // Logique pour s'assurer que currentGroup ne devienne pas négatif
             currentGroup = (currentGroup - 1 + totalGroups) % totalGroups;
             updateAvisSlider();
+            startAutoSlide();
         });
-
-        // Navigation Automatique
-        setInterval(() => {
-            currentGroup = (currentGroup + 1) % totalGroups;
-            updateAvisSlider();
-        }, slideDuration);
 
         // Pagination au Clic
         avisDots.forEach(dot => {
             dot.addEventListener('click', (e) => {
-                currentGroup = parseInt(e.target.dataset.index);
+                currentGroup = parseInt(e.target.dataset.group);
                 updateAvisSlider();
+                startAutoSlide();
             });
         });
     }
+
 });
