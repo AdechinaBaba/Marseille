@@ -135,72 +135,56 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    /* ========================================================= */
-    /* 4. SLIDER AVIS CLIENTS (Logique par Groupe) */
-    /* ========================================================= */
+/* ========================================================= */
+/* 4. SLIDER AVIS CLIENTS (Logique Scroll-Snap) */
+/* ========================================================= */
 
-    const avisWrapper = document.querySelector('.testimonials-wrapper');
-    const nextAvisBtn = document.querySelector('.next-avis-btn');
-    const prevAvisBtn = document.querySelector('.prev-avis-btn');
-    const avisDots = document.querySelectorAll('.avis-pagination .dot');
+const avisWrapper = document.querySelector('.testimonials-wrapper');
+const nextAvisBtn = document.querySelector('.next-avis-btn');
+const prevAvisBtn = document.querySelector('.prev-avis-btn');
+const avisDots = document.querySelectorAll('.avis-pagination .dot');
 
-    const totalGroups = 4; // Nous avons maintenant 4 groupes fixes.
-    let currentGroup = 0; // L'index va de 0 à 3.
-    const slideDuration = 10000;
-    let autoSlideInterval;
+const GAP_WIDTH = 30; // Correspond au gap: 30px dans le CSS
 
-    function updateAvisSlider() {
-        // Le décalage est toujours 0%, -25%, -50%, -75% quel que soit l'écran.
-        const offset = -currentGroup * (100 / totalGroups);
-        avisWrapper.style.transform = `translateX(${offset}%)`;
-
-        // Met à jour les points de pagination (maintenant direct)
-        avisDots.forEach(dot => dot.classList.remove('active'));
-        if (avisDots[currentGroup]) {
-            avisDots[currentGroup].classList.add('active');
-        }
+function getScrollAmount() {
+    const wrapperWidth = avisWrapper.offsetWidth;
+    const slidesPerView = window.innerWidth <= 600 ? 1 : (window.innerWidth <= 1024 ? 2 : 3);
+    
+    // Calcul de la largeur exacte d'une "page" (3 slides + 2 gaps, ou 1 slide)
+    if (slidesPerView === 3) {
+        // Largeur de la "page" est 100% de la vue
+        return wrapperWidth; 
+    } else if (slidesPerView === 2) {
+        // Largeur de la "page" est 100% de la vue
+        return wrapperWidth; 
+    } else {
+        // Mobile : Largeur d'une seule slide (100% + gap)
+        return avisWrapper.querySelector('.testimonial-card').offsetWidth + GAP_WIDTH;
     }
+}
 
-    function startAutoSlide() {
-        clearInterval(autoSlideInterval);
-        autoSlideInterval = setInterval(() => {
-            currentGroup = (currentGroup + 1) % totalGroups;
-            updateAvisSlider();
-        }, slideDuration);
-    }
-
-
-    if (avisWrapper) {
-        // Le redimensionnement n'a plus besoin de logique complexe, le CSS gère l'affichage.
-        window.addEventListener('resize', () => {
-            updateAvisSlider(); // S'assure de l'alignement
-            startAutoSlide();
+if (avisWrapper) {
+    // --- Navigation Manuelle ---
+    nextAvisBtn.addEventListener('click', () => {
+        const scrollAmount = getScrollAmount();
+        // Fait défiler le wrapper horizontalement
+        avisWrapper.scrollBy({
+            left: scrollAmount, 
+            behavior: 'smooth'
         });
+    });
 
-        updateAvisSlider();
-        startAutoSlide();
-
-        // Navigation Manuelle
-        nextAvisBtn.addEventListener('click', () => {
-            currentGroup = (currentGroup + 1) % totalGroups;
-            updateAvisSlider();
-            startAutoSlide();
+    prevAvisBtn.addEventListener('click', () => {
+        const scrollAmount = getScrollAmount();
+        avisWrapper.scrollBy({
+            left: -scrollAmount, 
+            behavior: 'smooth'
         });
+    });
 
-        prevAvisBtn.addEventListener('click', () => {
-            currentGroup = (currentGroup - 1 + totalGroups) % totalGroups;
-            updateAvisSlider();
-            startAutoSlide();
-        });
-
-        // Pagination au Clic
-        avisDots.forEach(dot => {
-            dot.addEventListener('click', (e) => {
-                currentGroup = parseInt(e.target.dataset.group);
-                updateAvisSlider();
-                startAutoSlide();
-            });
-        });
-    }
+    // NOTE : La pagination (dots) et l'autoplay deviennent complexes avec scroll-snap 
+    // car on ne connaît plus l'index exact. Je vous recommande de les désactiver 
+    // ou de les laisser au "toucher" si vous ne voulez pas d'une logique JS trop lourde.
+}
 
 });

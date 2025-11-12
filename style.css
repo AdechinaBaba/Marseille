@@ -888,13 +888,14 @@ body {
 }
 
 
-/* --- SECTION AVIS CLIENTS / TÉMOIGNAGES (VERSION PAR GROUPE) --- */
+
+/* --- SECTION AVIS CLIENTS (VERSION FINALE SCROLL-SNAP) --- */
 .testimonials-section {
-    padding: 80px 5%;
+    padding: 10px 5%;
     background-color: var(--color-gris-chaud);
     text-align: center;
-    /* Masque de manière fiable tout ce qui dépasse horizontalement */
-    overflow-x: hidden;
+    /* Masque tout ce qui dépasse horizontalement (essentiel pour scroll-snap) */
+    overflow: hidden;
 }
 
 /* Réduction de l'espacement H2/P */
@@ -915,72 +916,59 @@ body {
     margin: 0 auto;
     position: relative;
     padding: 30px 0;
-    /* S'assurer qu'aucune bordure de carte ne dépasse accidentellement */
-    padding: 0 1px;
+    overflow: hidden;
 }
 
-/* Le Conteneur qui défile (Wrapper) */
+/* --- Wrapper de Défilement Horizontal (CLÉ DU SCROLL-SNAP) --- */
 .testimonials-wrapper {
     display: flex;
-    transition: transform 0.5s ease-in-out;
+    overflow-x: scroll;
+    /* Définit le comportement d'alignement forcé */
+    scroll-snap-type: x mandatory;
 
-    /* Le wrapper contient 4 groupes de 100% */
-    width: 400%;
-
-    margin-left: 0;
-    margin-right: 0;
+    /* Espacement entre les cartes (gouttière) */
+    gap: 30px;
+    padding-bottom: 20px;
+    scrollbar-width: none;
 }
 
-/* NOUVEAU : Le Conteneur de Groupe (Le "Grand Card") */
-.testimonial-group-card {
-    flex-shrink: 0;
-    /* 100% / 4 groupes = 25% de la largeur du wrapper, soit 100% de la fenêtre de vue */
-    width: 25%;
-    display: flex;
-
-    /* Utilisation de Flexbox pour aligner les 3 cartes internes */
-    justify-content: space-between;
-
-    box-sizing: border-box;
-
-    /* Marge intérieure pour s'assurer que les cartes ne collent pas aux bords du slider */
-    padding: 0 15px;
+/* Masque la barre de défilement (Chrome, Safari, Edge) */
+.testimonials-wrapper::-webkit-scrollbar {
+    display: none;
 }
 
-/* La Carte Individuelle (Doit être 1/3 de son conteneur parent) */
 .testimonial-card {
+    background: var(--color-blanc-pur);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    padding: 0;
     flex-shrink: 0;
     box-sizing: border-box;
-
-    /* Largeur : 1/3 du conteneur de groupe (moins l'espace de la gouttière) */
-    width: calc(33.333% - 10px);
-
-    /* La marge interne crée la gouttière de 10px entre les 3 cartes */
-    margin: 0 5px;
-
-    padding: 0;
+    /* CALCUL CLÉ pour 3 vues : 100% - (Nombre de gaps * Largeur gap) / Nombre de vues */
+    min-width: calc((100% - (2 * 30px)) / 3);
+    max-width: calc((100% - (2 * 30px)) / 3);
+    scroll-snap-align: start;
+    height: 300px;
 }
 
 .testimonial-image {
     width: 100%;
-    height: 300px;
+    height: 100%;
     object-fit: contain;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
-    background-color: var(--color-blanc-pur);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    display: block;
 }
 
-
-/* --- Navigation et Pagination (Styles existants) --- */
+/* --- Navigation et Pagination --- */
 .slider-navigation {
     display: flex;
-    justify-content: flex-end;
-    /* Alignement par défaut sur desktop */
+    justify-content: center;
     gap: 15px;
     max-width: 1200px;
-    margin: 30px auto 0;
+    margin: 5px auto 15px;
     padding: 0 5%;
+    
 }
 
 .prev-avis-btn,
@@ -1025,33 +1013,20 @@ body {
 }
 
 
-/* --- RESPONSIVE MOBILE (Écran <= 768px) --- */
-@media (max-width: 768px) {
+/* --- RESPONSIVE MOBILE ET TABLETTE --- */
 
-    /* Mobile : Le wrapper contient toujours 4 groupes */
-    .testimonials-wrapper {
-        width: 400%;
-    }
-
-    /* Le groupe prend toujours 25% du wrapper (100% de la vue) */
-    .testimonial-group-card {
-        width: 25%;
-        padding: 0 10px;
-        /* Moins de marge sur mobile */
-        justify-content: center;
-        /* Centre la seule carte affichée */
-    }
-
-    /* Mobile : La carte individuelle prend 100% de son parent (le groupe) */
+@media (max-width: 1024px) {
     .testimonial-card {
-        width: 100%;
-        margin: 0;
+        min-width: calc((100% - 30px) / 2);
+        max-width: calc((100% - 30px) / 2);
     }
+}
 
-    /* 💥 CORRECTION MOBILE 💥 : Masquer les deux autres cartes du groupe */
-    /* Cela garantit que seul le premier avis est visible dans chaque groupe sur mobile */
-    .testimonial-group-card>.testimonial-card:nth-child(n+2) {
-        display: none;
+@media (max-width: 600px) {
+    .testimonial-card {
+        /* Mobile: 1 image (100% de la vue) */
+        min-width: 100%;
+        max-width: 100%;
     }
 
     /* Centrer les boutons de navigation sur mobile */
@@ -1062,9 +1037,6 @@ body {
 }
 
 
-
-
-
 /* --- FOOTER PRINCIPAL --- */
 .main-footer {
     background-color: var(--color-noir-doux);
@@ -1072,6 +1044,7 @@ body {
     color: var(--color-blanc-pur);
     padding: 50px 5%;
     font-size: 1rem;
+    padding-top: 20px;
 }
 
 .footer-grid {
