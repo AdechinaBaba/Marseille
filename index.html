@@ -333,7 +333,11 @@
                     </p>
                 </div>
 
-                <form action="merci.html" method="POST" netlify netlify-honeypot="bot-field" class="contact-form">
+                <form name="contact"method="POST" action="merci.html" netlify netlify-honeypot="bot-field" class="contact-form">
+
+                    <input type="hidden" name="form-name" value="contact">
+
+                    <input type="hidden" name="bot-field">
 
                     <div class="form-group">
                         <label for="name">Nom / Société</label>
@@ -355,8 +359,11 @@
                         <textarea id="project" name="project" rows="5" required></textarea>
                     </div>
 
-                    <button type="submit" class="btn btn-primary full-width">Envoyer ma demande de devis</button>
+                    <button type="submit" class="btn btn-primary full-width">
+                        Envoyer ma demande de devis
+                    </button>
                 </form>
+
             </div>
         </div>
     </section>
