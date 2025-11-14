@@ -1149,3 +1149,67 @@ body {
         gap: 10px 20px;
     }
 }
+
+/* ------------------------------------------------ */
+/* --- PAGE RÉALISATIONS (PORTFOLIO GRID) --- */
+/* ------------------------------------------------ */
+
+#portfolio {
+    background-color: var(--color-blanc-pur); 
+    padding: 80px 5%;
+    text-align: center;
+}
+
+.gallery-grid {
+    display: grid;
+    /* Desktop : 3 colonnes flexibles, min 300px par colonne */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+    gap: 20px; /* Espace entre les photos */
+    margin-top: 40px;
+}
+
+.gallery-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    /* Laisse un peu de marge autour du cadre */
+    padding: 5px; 
+    background-color: white;
+}
+
+.gallery-item img {
+    width: 100%;
+    /* Hauteur fixe pour que toutes les images soient alignées horizontalement */
+    height: 300px; 
+    object-fit: cover; /* Assure que l'image couvre la zone sans déformation */
+    display: block;
+    border-radius: 4px; /* Un léger arrondi pour l'image intérieure */
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Effet simple au survol */
+.gallery-item:hover img {
+    transform: scale(1.02); /* Léger zoom */
+    opacity: 0.9;
+}
+
+/* --- Responsive pour les tablettes --- */
+@media (max-width: 992px) {
+    .gallery-grid {
+        /* Tablette : 2 colonnes */
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+}
+
+/* --- Responsive pour les mobiles --- */
+@media (max-width: 600px) {
+    .gallery-grid {
+        /* Mobile : 1 colonne pleine */
+        grid-template-columns: 1fr;
+    }
+    
+    .gallery-item img {
+        height: 250px; /* Réduire légèrement la hauteur sur mobile */
+    }
+}
