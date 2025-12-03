@@ -327,6 +327,10 @@ body {
 
 /* --- SECTION À PROPOS --- */
 
+#a-propos .container .section-title {
+    margin-bottom: 30px;
+}
+
 .about-section {
     padding: 50px 5%;
     background-color: var(--color-gris-chaud);
@@ -631,6 +635,22 @@ body {
 
 /* --- SECTION PORTFOLIO / RÉALISATIONS --- */
 
+.container .section-title {
+    margin-bottom: 5px;
+}
+
+.section-subtitle {
+    font-size: 1.3rem;
+    /* Taille agréable et lisible */
+    font-weight: 500;
+    /* Semi-gras pour un peu d'emphase */
+    font-style: italic;
+    /* Un style un peu détendu et élégant */
+    letter-spacing: 0.05em;
+    /* Espacement de lettres pour aérer le texte */
+}
+
+
 .portfolio-section {
     padding: 60px 5%;
     background-color: var(--color-blanc-pur);
@@ -751,6 +771,7 @@ body {
 }
 
 .contact-intro-text {
+    margin-top: auto;
     color: var(--text-color);
     line-height: 1.6;
 }
@@ -766,6 +787,10 @@ body {
     border-radius: 8px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
     overflow: hidden;
+}
+
+.contact-header .section-title {
+    margin-bottom: 5px;
 }
 
 /* --- Colonne 1: Infos de Contact --- */
@@ -999,7 +1024,7 @@ textarea {
 
 /* Réduction de l'espacement H2/P */
 .testimonials-section .section-title {
-    margin-top: 20px;
+    margin-top: 25px;
     margin-bottom: 10px;
 }
 
