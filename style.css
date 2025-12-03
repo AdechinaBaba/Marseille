@@ -1,6 +1,6 @@
 /* --- VOS COULEURS PERSONNALISÉES --- */
 :root {
-    --color-chêne-clair: #C19A6B;
+    --color-chêne-clair: #e8a757;
     /* CTA & Titres */
     --color-gris-chaud: #dedddc;
     /* Fond de sections */
@@ -8,8 +8,10 @@
     /* Fond principal */
     --color-bleu-ardoise: #334155;
     /* Navigation & Textes Forts */
-    --color-noir-doux: #1E1E1E;
+    --color-noir-doux: #181818;
     /* Paragraphes longs */
+    --text-color: #1f2937;
+    --primary-color: #1e3a8a;
 }
 
 /* --- GÉNÉRAL & RESET --- */
@@ -129,7 +131,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.65);
+    background-color: rgba(0, 0, 0, 0.20);
     /* Opacité augmentée */
     z-index: 1;
     /* Assure que le filtre est au-dessus de l'image */
@@ -163,6 +165,7 @@ body {
 .subtitle {
     font-size: 1.5rem;
     margin-bottom: 30px;
+    white-space: nowrap;
 }
 
 .cta-button {
@@ -506,7 +509,7 @@ body {
     height: 400px;
 
     /* 2. Image de fond (Remplacez le chemin par celui de votre image) */
-    background-image: url('images/paralax2.AVIF');
+    background-image: url('images/paralax2.jpg');
 
     /* 3. L'effet Parallax : fixe l'image lors du défilement */
     background-attachment: fixed;
@@ -734,156 +737,252 @@ body {
     }
 }
 
-
-/* --- SECTION CONTACT & FORMULAIRE --- */
-
-.contact-section {
-    padding: 80px 5%;
-    background-color: var(--color-gris-chaud);
+/* ------------------------------------------- */
+/*           Contact  section                  */
+/* ------------------------------------------- */
+#contact {
+    background-color: white;
     text-align: center;
 }
 
-/* 1. ESPACEMENT DES TITRES DE SECTION */
-.contact-section .section-title {
-    margin-bottom: 20px;
-    /* Réduit la distance entre le h2 et le paragraphe subtitle */
+.contact-header {
+    max-width: 900px;
+    margin: 0 auto 20px auto;
 }
 
-.contact-section .section-subtitle {
-    margin-bottom: 40px;
-    /* Marge sous le sous-titre avant le contenu */
+.contact-intro-text {
+    color: var(--text-color);
+    line-height: 1.6;
 }
 
-.contact-content {
+.contact-container {
     display: flex;
-    gap: 50px;
-    align-items: stretch;
-    justify-content: center;
-    margin-top: 40px;
-}
-
-/* Bloc d'informations : (2/5 = 40% de la largeur) */
-.contact-info {
-    flex: 2;
-    padding: 05px;
-    background-color: var(--color-bleu-ardoise);
-    color: var(--color-blanc-pur);
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    max-width: 1200px;
+    margin: 0 auto;
     text-align: left;
-    min-height: 400px;
-    /* Assure une hauteur minimale */
+    gap: 40px;
+    background: #fff;
+    /* Fond blanc */
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
 }
 
-.contact-info h4 {
-    padding-top: 10px;
+/* --- Colonne 1: Infos de Contact --- */
+.contact-info {
+    flex: 1;
+    background: var(--color-bleu-ardoise);
+    color: white;
+    padding: 50px 35px;
+    border-radius: 8px 0 0 8px;
+}
+
+.info-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.info-subtext {
+    font-size: 1rem;
+    opacity: 0.8;
+    margin-bottom: 40px;
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.info-icon {
     font-size: 1.5rem;
     color: var(--color-chêne-clair);
-    margin-bottom: 25px;
+    width: 40px;
+    flex-shrink: 0;
 }
 
-.contact-info p {
-    margin-bottom: 15px;
+.info-details {
+    line-height: 1.4;
+}
+
+.info-label {
+    font-weight: 300;
+    font-size: 0.9rem;
+    margin: 0;
+    opacity: 0.8;
+}
+
+.info-value,
+.info-value a {
+    font-weight: 600;
     font-size: 1.1rem;
-}
-
-.contact-info .fa-solid {
-    margin-right: 10px;
-}
-
-/* Liens cliquables (téléphone, email) */
-.contact-info a {
-    color: var(--color-blanc-pur);
+    color: white;
     text-decoration: none;
+    display: block;
     transition: color 0.3s;
 }
 
-.contact-info a:hover {
+.info-value a:hover {
     color: var(--color-chêne-clair);
 }
 
-.cta-text {
-    font-weight: bold;
-    margin-top: 30px;
-    font-size: 1.2rem !important;
-    text-align: center;
+.info-social {
+    margin-top: 50px;
+    display: flex;
+    gap: 15px;
 }
 
-/* Le Formulaire : (3/5 = 60% de la largeur) */
+.info-social a {
+    color: white;
+    font-size: 1.5rem;
+    transition: color 0.3s;
+}
+
+.info-social a:hover {
+    color: var(--color-chêne-clair);
+}
+
+/* --- Colonne 2: Formulaire --- */
+.contact-form-wrapper {
+    flex: 2;
+    padding: 40px;
+}
+
+.form-title {
+    font-size: 1.8rem;
+    color: var(--text-color);
+    margin-top: 0;
+    margin-bottom: 30px;
+    font-weight: 700;
+}
+
 .contact-form {
-    flex: 3;
-    background-color: var(--color-blanc-pur);
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
 }
 
 .form-group {
-    margin-bottom: 20px;
-}
-
-.contact-form label {
-    display: block;
-    text-align: left;
-    margin-bottom: 5px;
-    font-weight: 600;
-    color: var(--color-noir-doux);
-}
-
-.contact-form input[type="text"],
-.contact-form input[type="email"],
-.contact-form input[type="tel"],
-.contact-form textarea {
+    display: flex;
+    flex-direction: column;
     width: 100%;
-    padding: 12px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+}
+
+.form-group.half-width {
+    flex: 1 1 calc(50% - 10px);
+    /* Gère les deux colonnes côte à côte */
+}
+
+label {
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--text-color);
+    font-size: 0.95rem;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+textarea,
+/* AJOUT: style pour le select */
+select {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
     font-size: 1rem;
+    color: var(--text-color);
     transition: border-color 0.3s;
+    width: 100%;
+    /* Assure que le sélecteur prend toute la largeur */
 }
 
-.contact-form textarea {
-    resize: vertical;
+/* NOUVEAU: Style spécifique pour le champ select */
+select {
+    /* Cache l'apparence native pour uniformiser le style */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-color: white;
+    /* Ajout d'une flèche personnalisée pour indiquer que c'est un menu déroulant */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23616a79'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 18px;
+    cursor: pointer;
 }
 
-.contact-form input:focus,
-.contact-form textarea:focus {
-    border-color: var(--color-bleu-ardoise);
+input:focus,
+textarea:focus,
+select:focus {
+    border-color: var(--color-chêne-clair);
     outline: none;
 }
 
-.contact-form .full-width {
-    width: 100%;
+textarea {
+    resize: vertical;
 }
 
-/* Style du bouton (réutilise btn-primary) */
-.contact-form .btn-primary {
-    width: 100%;
-    text-align: center;
-    justify-content: center;
+/* MODIFICATION: Style du bouton pour inclure l'icône */
+.btn-primary-form {
+    background-color: var(--color-chêne-clair);
+    /* Bouton Orange */
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 4px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.3s;
     margin-top: 10px;
+    width: auto;
+
+    /* NOUVEAU: Aligne le texte et l'icône */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    /* Espace entre le texte et l'icône */
 }
 
-/* --- RESPONSIVE CONTACT --- */
-@media (max-width: 900px) {
-    .contact-content {
-        /* Empilement des blocs sur tablette/mobile */
+.btn-primary-form:hover {
+    background-color: var(--color-bleu-ardoise);
+    /* Bleu foncé au survol */
+}
+
+.send-icon {
+    font-size: 1rem;
+    transform: rotate(45deg);
+    /* Donne un look "Paper Plane" */
+    position: relative;
+    left: 2px;
+}
+
+/* ------------------------------------------- */
+/* --- MEDIA QUERIES (Réactivité) --- */
+/* ------------------------------------------- */
+@media (max-width: 992px) {
+    .contact-container {
         flex-direction: column;
-        align-items: center;
+        gap: 0;
+        margin: 0 20px;
     }
 
-    .contact-info,
-    .contact-form {
+    .contact-info {
+        border-radius: 8px 8px 0 0;
+        /* Arrondi seulement en haut */
+        padding: 40px 25px;
+    }
+
+    .contact-form-wrapper {
+        padding: 30px 25px;
+    }
+
+    .form-group.half-width {
+        flex: 1 1 100%;
         /* Prend toute la largeur sur mobile */
-        max-width: 100%;
-        width: 100%;
-        /* Retirer le min-height pour le mobile */
-        min-height: auto;
-    }
-
-    .contact-info h4,
-    .cta-text {
-        text-align: center;
     }
 }
 
@@ -900,7 +999,8 @@ body {
 
 /* Réduction de l'espacement H2/P */
 .testimonials-section .section-title {
-    margin-bottom: 5px;
+    margin-top: 20px;
+    margin-bottom: 10px;
 }
 
 .testimonials-section .section-subtitle {
@@ -968,7 +1068,7 @@ body {
     max-width: 1200px;
     margin: 5px auto 15px;
     padding: 0 5%;
-    
+
 }
 
 .prev-avis-btn,
@@ -1038,6 +1138,7 @@ body {
 
 
 /* --- FOOTER PRINCIPAL --- */
+
 .main-footer {
     background-color: var(--color-noir-doux);
     /* Couleur de fond sombre pour le contraste */
@@ -1155,7 +1256,7 @@ body {
 /* ------------------------------------------------ */
 
 #portfolio {
-    background-color: var(--color-blanc-pur); 
+    background-color: var(--color-blanc-pur);
     padding: 80px 5%;
     text-align: center;
 }
@@ -1163,8 +1264,9 @@ body {
 .gallery-grid {
     display: grid;
     /* Desktop : 3 colonnes flexibles, min 300px par colonne */
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
-    gap: 20px; /* Espace entre les photos */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    /* Espace entre les photos */
     margin-top: 40px;
 }
 
@@ -1174,23 +1276,26 @@ body {
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     /* Laisse un peu de marge autour du cadre */
-    padding: 5px; 
+    padding: 5px;
     background-color: white;
 }
 
 .gallery-item img {
     width: 100%;
     /* Hauteur fixe pour que toutes les images soient alignées horizontalement */
-    height: 300px; 
-    object-fit: cover; /* Assure que l'image couvre la zone sans déformation */
+    height: 300px;
+    object-fit: cover;
+    /* Assure que l'image couvre la zone sans déformation */
     display: block;
-    border-radius: 4px; /* Un léger arrondi pour l'image intérieure */
+    border-radius: 4px;
+    /* Un léger arrondi pour l'image intérieure */
     transition: transform 0.3s ease-in-out;
 }
 
 /* Effet simple au survol */
 .gallery-item:hover img {
-    transform: scale(1.02); /* Léger zoom */
+    transform: scale(1.02);
+    /* Léger zoom */
     opacity: 0.9;
 }
 
@@ -1208,8 +1313,9 @@ body {
         /* Mobile : 1 colonne pleine */
         grid-template-columns: 1fr;
     }
-    
+
     .gallery-item img {
-        height: 250px; /* Réduire légèrement la hauteur sur mobile */
+        height: 250px;
+        /* Réduire légèrement la hauteur sur mobile */
     }
 }

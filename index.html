@@ -10,6 +10,7 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 </head>
 
@@ -44,7 +45,7 @@
             <div class="slide slide-1 active" data-bg-image="images/Hero2.jpg">
                 <div class="slide-content">
                     <h1 class="main-title">L'Art du Bois Sur Mesure</h1>
-                    <p class="subtitle">Façonner vos idées, créer votre intérieur d'exception.</p>
+                    <p class="subtitle">Transformez votre intérieur et créez de nouvelles perspectives chez vous.</p>
                     <a href="#a-propos" class="cta-button">EN SAVOIR PLUS</a>
                 </div>
             </div>
@@ -310,61 +311,100 @@
         </div>
     </section>
 
-    <section id="contact" class="contact-section">
-        <div class="container">
-            <h2 class="section-title">Prenons Contact !</h2>
-            <p class="section-subtitle">
+    <section id="contact" class="section-padding">
+
+        <div class="contact-header">
+            <h2 class="section-title"> <span class="highlight-color">Prenons Contact !</span></h2>
+            <p class="contact-intro-text">
                 Vous avez un projet de menuiserie, d'ébénisterie ou d'agencement à Marseille ?
                 Décrivez-le-nous, nous vous répondrons rapidement.
             </p>
+        </div>
 
-            <div class="contact-content">
-                <div class="contact-info">
-                    <h4>Contactez Nicolas Graell</h4>
-                    <p>
-                        <i class="fa-solid fa-phone"></i> Tél : <a href="tel:+33622501079">06 22 50 10 79</a>
-                    </p>
-                    <p>
-                        <i class="fa-solid fa-envelope"></i> Email : <a
-                            href="mailto:nicolas.graell@gmail.com">nicolas.graell@gmail.com</a>
-                    </p>
-                    <p>
-                        <i class="fa-solid fa-location-dot"></i> Basé à Marseille
-                    </p>
+        <div class="contact-container">
+
+            <div class="contact-info">
+                <h3 class="info-title">Nos coordonnées</h3>
+                <p class="info-subtext">Nous vous répondrons dans le plus vite possible.</p>
+
+                <div class="info-item">
+                    <i class="fas fa-phone info-icon"></i>
+                    <div class="info-details">
+                        <p class="info-label">Appelez-nous</p>
+                        <a href="tel:+33622501079" class="info-value">06 22 50 10 79</a>
+                    </div>
                 </div>
 
-                <form name="contact"method="POST" action="merci.html" netlify netlify-honeypot="bot-field" class="contact-form">
-
-                    <input type="hidden" name="form-name" value="contact">
-
-                    <input type="hidden" name="bot-field">
-
-                    <div class="form-group">
-                        <label for="name">Nom / Société</label>
-                        <input type="text" id="name" name="name" required>
+                <div class="info-item">
+                    <i class="fas fa-envelope info-icon"></i>
+                    <div class="info-details">
+                        <p class="info-label">Email</p>
+                        <a href="mailto:nicolas.graell@gmail.com" class="info-value">nicolas.graell@gmail.com</a>
                     </div>
+                </div>
 
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" name="email" required>
+                <div class="info-item">
+                    <i class="fas fa-map-marker-alt info-icon"></i>
+                    <div class="info-details">
+                        <p class="info-label">Adresse</p>
+                        <p class="info-value">Basé à Marseille</p>
                     </div>
-
-                    <div class="form-group">
-                        <label for="phone">Téléphone</label>
-                        <input type="tel" id="phone" name="phone">
-                    </div>
-
-                    <div class="form-group full-width">
-                        <label for="project">Description du projet</label>
-                        <textarea id="project" name="project" rows="5" required></textarea>
-                    </div>
-
-                    <button type="submit" class="btn btn-primary full-width">
-                        Envoyer ma demande de devis
-                    </button>
-                </form>
+                </div>
 
             </div>
+
+            <div class="contact-form-wrapper">
+                <form name="contact" action="merci.html" netlify netlify-honeypot="bot-field" class="contact-form">
+                    <input type="hidden" name="form-name" value="contact">
+                    <input type="hidden" name="bot-field">
+
+                    <h3 class="form-title">Contactez Nicolas Graell</h3>
+
+                    <div class="form-group">
+                        <label for="nom">Nom Complet *</label>
+                        <input type="text" id="nom" name="nom" required placeholder="Votre nom et prénom">
+                    </div>
+
+                    <div class="form-group half-width">
+                        <label for="email">Email *</label>
+                        <input type="email" id="email" name="email" required placeholder="votre.email@exemple.com">
+                    </div>
+
+                    <div class="form-group half-width">
+                        <label for="tel">Téléphone</label>
+                        <input type="tel" id="tel" name="tel" placeholder="+33 4XX XX XX XX">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="sujet">Type de Service concerné *</label>
+                        <select id="sujet" name="sujet" required>
+                            <option value="" disabled selected>Choisir un service...</option>
+                            <option value="Ebénisterie">Ébénisterie</option>
+                            <option value="Menuiserie">Menuiserie</option>
+                            <option value="Cuisines équipées">Cuisines équipées</option>
+                            <option value="Charpente">Charpente</option>
+                            <option value="Espaces de rangement">Espaces de rangement</option>
+                            <option value="Installation de portes">Installation de portes</option>
+                            <option value="Claustras en bois">Claustras en bois</option>
+                            <option value="Montage de meubles">Montage de meubles</option>
+                            <option value="Mezzanines">Mezzanines</option>
+                            <option value="Doublage bois & chalets">Doublage bois & chalets</option>
+                            <option value="Décoration intérieure">Décoration intérieure</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Votre Message *</label>
+                        <textarea id="message" name="message" rows="5" required
+                            placeholder="Décrivez votre projet ou votre problème..."></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary-form">
+                        Envoyer le message <i class="fas fa-paper-plane send-icon"></i>
+                    </button>
+                </form>
+            </div>
+
         </div>
     </section>
 
@@ -432,7 +472,7 @@
     <script src="script.js"></script>
 </body>
 
-<footer class="main-footer" id="contact">
+<footer class="main-footer">
     <div class="container">
         <div class="footer-grid">
 
