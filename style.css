@@ -327,7 +327,7 @@ body {
 
 /* --- SECTION À PROPOS --- */
 
-#a-propos .container .section-title {
+#apropos .container .section-title {
     margin-bottom: 30px;
 }
 
@@ -640,11 +640,11 @@ body {
 }
 
 .section-subtitle {
-    font-size: 1.3rem;
+    font-size: 1.1rem;
     /* Taille agréable et lisible */
     font-weight: 500;
     /* Semi-gras pour un peu d'emphase */
-    font-style: italic;
+    
     /* Un style un peu détendu et élégant */
     letter-spacing: 0.05em;
     /* Espacement de lettres pour aérer le texte */
