@@ -62,18 +62,26 @@ document.addEventListener('DOMContentLoaded', () => {
             isSwiping = true;
         });
 
-        // 2. Mouvement du toucher (Votre code de `touchmove` est correct)
         sliderContainer.addEventListener('touchmove', (e) => {
             if (!isSwiping) return;
+            
+            // Empêche le défilement vertical de la page pendant le balayage horizontal du slider.
+            // C'est souvent la clé pour que le swipe fonctionne bien sur mobile.
+            e.preventDefault(); 
+        
+            // Calcule le déplacement du doigt
             const currentX = e.touches[0].clientX;
             const diffX = currentX - startX;
+        
+            // Calcule le décalage en pourcentage 
             const containerWidth = sliderContainer.offsetWidth / totalSlides;
             const currentOffset = -currentSlide * 100;
             const dragOffset = (diffX / containerWidth) * 100;
-
+        
+            // Déplace le conteneur SANS transition (pour le mouvement fluide en temps réel)
             sliderContainer.style.transition = 'none';
             sliderContainer.style.transform = `translateX(${currentOffset + dragOffset}%)`;
-        });
+        }, { passive: false });
 
         // 3. Fin du toucher
         sliderContainer.addEventListener('touchend', (e) => {
