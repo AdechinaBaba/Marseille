@@ -384,7 +384,7 @@ body {
 /* Nouveau : Wrapper pour la vidéo et le bouton Play */
 .video-wrapper {
     position: relative;
-    padding-bottom: 82%;
+    padding-bottom: 88%;
     /* Augmenté de 56.25% (16:9) à 65% pour une hauteur supplémentaire */
     height: 0;
     overflow: hidden;
