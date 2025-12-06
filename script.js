@@ -1,10 +1,13 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     /* ========================================================= */
-    /* 1. SLIDER D'ACCUEIL (Hero) */
+    /* 1. SLIDER D'ACCUEIL (Hero) - AJOUT DU SWIPE MOBILE */
     /* ========================================================= */
     const sliderContainer = document.getElementById('sliderContainer');
-    // Vérifie que les éléments du slider existent avant de les manipuler
+
+    // Déclare la variable d'intervalle en dehors du bloc if pour l'arrêter/redémarrer si nécessaire
+    let autoSlideInterval;
+
     if (sliderContainer) {
         const prevBtn = document.querySelector('.prev-btn');
         const nextBtn = document.querySelector('.next-btn');
@@ -12,31 +15,94 @@ document.addEventListener('DOMContentLoaded', () => {
 
         let currentSlide = 0;
         const totalSlides = slides.length;
+        let startX = 0; // Point de départ du toucher
+        let isSwiping = false; // Indicateur de balayage
 
         // Fonction pour mettre à jour la position du slider
-        function updateSlider() {
+        function updateSlider(animate = true) {
             const offset = -currentSlide * 100;
+            sliderContainer.style.transition = animate ? 'transform 0.5s ease-in-out' : 'none';
             sliderContainer.style.transform = `translateX(${offset}%)`;
         }
 
+        // Fonction pour démarrer le défilement automatique
+        function startAutoSlide() {
+            // Nous effaçons toujours l'ancien intervalle avant d'en créer un nouveau
+            clearInterval(autoSlideInterval);
+            autoSlideInterval = setInterval(() => {
+                currentSlide = (currentSlide + 1) % totalSlides;
+                updateSlider();
+            }, 8000);
+        }
+
+        // --- INITIALISATION ---
+        updateSlider(false); // 👈 Appel UNIQUE pour initialiser la position (sans animation)
+        startAutoSlide(); // 👈 Démarrage du défilement automatique
+
         // Gestion des boutons de navigation
         nextBtn.addEventListener('click', () => {
+            // Arrête et redémarre l'intervalle après une action manuelle
+            startAutoSlide();
             currentSlide = (currentSlide + 1) % totalSlides;
             updateSlider();
         });
 
         prevBtn.addEventListener('click', () => {
+            startAutoSlide();
             currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
             updateSlider();
         });
 
-        // Défilement automatique toutes les 8 secondes
-        setInterval(() => {
-            currentSlide = (currentSlide + 1) % totalSlides;
-            updateSlider();
-        }, 8000);
-    }
+        // --- LOGIQUE DE SWIPE MOBILE ---
 
+        // 1. Début du toucher
+        sliderContainer.addEventListener('touchstart', (e) => {
+            clearInterval(autoSlideInterval); // Arrête le défilement automatique
+            startX = e.touches[0].clientX;
+            isSwiping = true;
+        });
+
+        // 2. Mouvement du toucher (Votre code de `touchmove` est correct)
+        sliderContainer.addEventListener('touchmove', (e) => {
+            if (!isSwiping) return;
+            const currentX = e.touches[0].clientX;
+            const diffX = currentX - startX;
+            const containerWidth = sliderContainer.offsetWidth / totalSlides;
+            const currentOffset = -currentSlide * 100;
+            const dragOffset = (diffX / containerWidth) * 100;
+
+            sliderContainer.style.transition = 'none';
+            sliderContainer.style.transform = `translateX(${currentOffset + dragOffset}%)`;
+        });
+
+        // 3. Fin du toucher
+        sliderContainer.addEventListener('touchend', (e) => {
+            if (!isSwiping) return;
+
+            const endX = e.changedTouches[0].clientX;
+            const diffX = endX - startX;
+            const swipeThreshold = 50;
+
+            if (diffX > swipeThreshold) {
+                currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            } else if (diffX < -swipeThreshold) {
+                currentSlide = (currentSlide + 1) % totalSlides;
+            }
+
+            updateSlider(true);
+            isSwiping = false;
+            startAutoSlide(); // Redémarre le défilement automatique
+        });
+
+        // touchcancel...
+        sliderContainer.addEventListener('touchcancel', () => {
+            if (isSwiping) {
+                updateSlider(true);
+                isSwiping = false;
+            }
+            startAutoSlide(); // Redémarre aussi l'autoslide si le swipe est annulé
+        });
+    }
 
     /* ========================================================= */
     /* 2. MENU MOBILE (Toggle) */
@@ -135,56 +201,56 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-/* ========================================================= */
-/* 4. SLIDER AVIS CLIENTS (Logique Scroll-Snap) */
-/* ========================================================= */
+    /* ========================================================= */
+    /* 4. SLIDER AVIS CLIENTS (Logique Scroll-Snap) */
+    /* ========================================================= */
 
-const avisWrapper = document.querySelector('.testimonials-wrapper');
-const nextAvisBtn = document.querySelector('.next-avis-btn');
-const prevAvisBtn = document.querySelector('.prev-avis-btn');
-const avisDots = document.querySelectorAll('.avis-pagination .dot');
+    const avisWrapper = document.querySelector('.testimonials-wrapper');
+    const nextAvisBtn = document.querySelector('.next-avis-btn');
+    const prevAvisBtn = document.querySelector('.prev-avis-btn');
+    const avisDots = document.querySelectorAll('.avis-pagination .dot');
 
-const GAP_WIDTH = 30; // Correspond au gap: 30px dans le CSS
+    const GAP_WIDTH = 30; // Correspond au gap: 30px dans le CSS
 
-function getScrollAmount() {
-    const wrapperWidth = avisWrapper.offsetWidth;
-    const slidesPerView = window.innerWidth <= 600 ? 1 : (window.innerWidth <= 1024 ? 2 : 3);
-    
-    // Calcul de la largeur exacte d'une "page" (3 slides + 2 gaps, ou 1 slide)
-    if (slidesPerView === 3) {
-        // Largeur de la "page" est 100% de la vue
-        return wrapperWidth; 
-    } else if (slidesPerView === 2) {
-        // Largeur de la "page" est 100% de la vue
-        return wrapperWidth; 
-    } else {
-        // Mobile : Largeur d'une seule slide (100% + gap)
-        return avisWrapper.querySelector('.testimonial-card').offsetWidth + GAP_WIDTH;
+    function getScrollAmount() {
+        const wrapperWidth = avisWrapper.offsetWidth;
+        const slidesPerView = window.innerWidth <= 600 ? 1 : (window.innerWidth <= 1024 ? 2 : 3);
+
+        // Calcul de la largeur exacte d'une "page" (3 slides + 2 gaps, ou 1 slide)
+        if (slidesPerView === 3) {
+            // Largeur de la "page" est 100% de la vue
+            return wrapperWidth;
+        } else if (slidesPerView === 2) {
+            // Largeur de la "page" est 100% de la vue
+            return wrapperWidth;
+        } else {
+            // Mobile : Largeur d'une seule slide (100% + gap)
+            return avisWrapper.querySelector('.testimonial-card').offsetWidth + GAP_WIDTH;
+        }
     }
-}
 
-if (avisWrapper) {
-    // --- Navigation Manuelle ---
-    nextAvisBtn.addEventListener('click', () => {
-        const scrollAmount = getScrollAmount();
-        // Fait défiler le wrapper horizontalement
-        avisWrapper.scrollBy({
-            left: scrollAmount, 
-            behavior: 'smooth'
+    if (avisWrapper) {
+        // --- Navigation Manuelle ---
+        nextAvisBtn.addEventListener('click', () => {
+            const scrollAmount = getScrollAmount();
+            // Fait défiler le wrapper horizontalement
+            avisWrapper.scrollBy({
+                left: scrollAmount,
+                behavior: 'smooth'
+            });
         });
-    });
 
-    prevAvisBtn.addEventListener('click', () => {
-        const scrollAmount = getScrollAmount();
-        avisWrapper.scrollBy({
-            left: -scrollAmount, 
-            behavior: 'smooth'
+        prevAvisBtn.addEventListener('click', () => {
+            const scrollAmount = getScrollAmount();
+            avisWrapper.scrollBy({
+                left: -scrollAmount,
+                behavior: 'smooth'
+            });
         });
-    });
 
-    // NOTE : La pagination (dots) et l'autoplay deviennent complexes avec scroll-snap 
-    // car on ne connaît plus l'index exact. Je vous recommande de les désactiver 
-    // ou de les laisser au "toucher" si vous ne voulez pas d'une logique JS trop lourde.
-}
+        // NOTE : La pagination (dots) et l'autoplay deviennent complexes avec scroll-snap 
+        // car on ne connaît plus l'index exact. Je vous recommande de les désactiver 
+        // ou de les laisser au "toucher" si vous ne voulez pas d'une logique JS trop lourde.
+    }
 
 });

@@ -121,9 +121,10 @@ body {
     text-align: center;
     position: relative;
     transition: opacity 0.5s;
+    width: 100%;
 }
 
-/* Effet de superposition sombre (Augmentation à 65% pour meilleure lisibilité) */
+/* Effet de superposition sombre  */
 .slide::before {
     content: "";
     position: absolute;
@@ -250,6 +251,18 @@ body {
         color: var(--color-chêne-clair);
     }
 
+    .hero-slider {
+        overflow: visible !important;
+        /* ❌ CRITIQUE : permet le touch */
+        touch-action: pan-x;
+        /* Autorise swipe horizontal */
+    }
+
+    .slider-container {
+        touch-action: pan-x;
+        will-change: transform;
+    }
+
     /* Affiche le bouton menu */
     .menu-toggle {
         display: block;
@@ -266,10 +279,12 @@ body {
 
     .subtitle {
         font-size: 1.2rem;
+        white-space: normal;
     }
 
     .slider-controls {
         padding: 0 3%;
+        z-index: 30;
     }
 
     .slide-content {
@@ -293,7 +308,7 @@ body {
         transform: translateX(100%);
         transition: transform 0.4s ease-in-out;
         display: none;
-        z-index: 99;
+        z-index: 20;
     }
 
     .main-nav.active {
@@ -445,24 +460,62 @@ body {
 }
 
 /* Liste des Valeurs Clés */
-.key-values {
-    list-style: none;
+.stats-grid {
+    display: grid;
+    /* Utilise la syntaxe de votre exemple pour deux colonnes */
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+    gap: 30px;
+    /* Espace entre les cartes */
+    padding-top: 50px;
+    /* Ajoute un espacement en haut */
+}
+
+.stat-card-about {
+    display: flex;
+    /* Aligne l'icône et le texte verticalement.
+       Votre exemple avait un conflit : align-items: center et align-items: self-start; 
+       Nous choisissons 'self-start' pour un alignement en haut du texte.
+    */
+    align-items: self-start;
+    gap: 20px;
+    /* Augmente légèrement l'espacement entre l'icône et le texte */
     padding: 0;
-    margin-top: 30px;
+    /* Supprime le padding pour un look plus épuré */
 }
 
-.key-values li {
-    margin-bottom: 15px;
-    font-size: 1.2rem;
-    font-weight: 600;
-    color: var(--color-bleu-ardoise);
-}
-
-.key-values .icon {
-    display: inline-block;
+.stat-icon-wrapper {
+    /* Conteneur de l'icône : Grand, impactant et de couleur primaire */
+    flex-shrink: 0;
+    /* Empêche l'icône de rétrécir */
     color: var(--color-chêne-clair);
-    font-size: 1.5rem;
-    margin-right: 10px;
+    /* Utilise la couleur d'accent (comme le primaire) */
+    font-size: 2.5em;
+    /* Grande taille d'icône pour un fort impact */
+    line-height: 1;
+    margin-top: 5px;
+    /* Petit ajustement pour aligner visuellement avec le titre */
+}
+
+.stat-title {
+    /* Titre (Titre du bénéfice) */
+    font-size: 1.2em;
+    /* Légèrement plus grand que votre 1.1em pour la lisibilité */
+    font-weight: 700;
+    color: var(--color-bleu-ardoise);
+    /* Utilise la couleur de texte principale (comme le text-color) */
+    margin-bottom: 3px;
+    margin-top: 0;
+    /* Assure l'alignement strict en haut */
+    /* display: flex; est retiré car inutile pour un titre standard */
+}
+
+.stat-description {
+    /* Description (Détail du bénéfice) */
+    font-size: 0.9em;
+    color: var(--color-gris-fonce, #666);
+    /* Utilise un gris ou un fallback */
+    line-height: 1.4;
 }
 
 
@@ -501,8 +554,16 @@ body {
         font-size: 2rem;
     }
 
-    .key-values {
-        padding-bottom: 0;
+    .stats-grid {
+        /* Passe à une seule colonne pour le mobile */
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding-top: 30px;
+    }
+
+    .stat-icon-wrapper {
+        font-size: 2em;
+        /* Légèrement réduit sur mobile */
     }
 }
 
@@ -644,7 +705,7 @@ body {
     /* Taille agréable et lisible */
     font-weight: 500;
     /* Semi-gras pour un peu d'emphase */
-    
+
     /* Un style un peu détendu et élégant */
     letter-spacing: 0.05em;
     /* Espacement de lettres pour aérer le texte */
