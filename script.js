@@ -1,12 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     /* ========================================================= */
-    /* 1. SLIDER D'ACCUEIL (Hero) - AJOUT DU SWIPE MOBILE */
+    /* 1. SLIDER D'ACCUEIL (Hero) - SANS SWIPE MOBILE */
     /* ========================================================= */
     const sliderContainer = document.getElementById('sliderContainer');
-
-    // Déclare la variable d'intervalle en dehors du bloc if pour l'arrêter/redémarrer si nécessaire
-    let autoSlideInterval;
 
     if (sliderContainer) {
         const prevBtn = document.querySelector('.prev-btn');
@@ -15,8 +12,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         let currentSlide = 0;
         const totalSlides = slides.length;
-        let startX = 0; // Point de départ du toucher
-        let isSwiping = false; // Indicateur de balayage
+
+        // Déclaration de l'intervalle dans la portée du 'if'
+        let autoSlideInterval;
 
         // Fonction pour mettre à jour la position du slider
         function updateSlider(animate = true) {
@@ -25,9 +23,8 @@ document.addEventListener('DOMContentLoaded', () => {
             sliderContainer.style.transform = `translateX(${offset}%)`;
         }
 
-        // Fonction pour démarrer le défilement automatique
+        // Fonction pour démarrer/redémarrer le défilement automatique
         function startAutoSlide() {
-            // Nous effaçons toujours l'ancien intervalle avant d'en créer un nouveau
             clearInterval(autoSlideInterval);
             autoSlideInterval = setInterval(() => {
                 currentSlide = (currentSlide + 1) % totalSlides;
@@ -36,80 +33,26 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // --- INITIALISATION ---
-        updateSlider(false); // 👈 Appel UNIQUE pour initialiser la position (sans animation)
-        startAutoSlide(); // 👈 Démarrage du défilement automatique
+        updateSlider(false); // Initialise la position sur la première slide SANS transition
+        startAutoSlide();     // Démarrage du défilement automatique
 
-        // Gestion des boutons de navigation
+        // Gestion des boutons de navigation (Clics)
         nextBtn.addEventListener('click', () => {
-            // Arrête et redémarre l'intervalle après une action manuelle
+            // Redémarre l'intervalle après une action manuelle
             startAutoSlide();
             currentSlide = (currentSlide + 1) % totalSlides;
             updateSlider();
         });
 
         prevBtn.addEventListener('click', () => {
+            // Redémarre l'intervalle après une action manuelle
             startAutoSlide();
             currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
             updateSlider();
         });
 
-        // --- LOGIQUE DE SWIPE MOBILE ---
-
-        // 1. Début du toucher
-        sliderContainer.addEventListener('touchstart', (e) => {
-            clearInterval(autoSlideInterval); // Arrête le défilement automatique
-            startX = e.touches[0].clientX;
-            isSwiping = true;
-        });
-
-        sliderContainer.addEventListener('touchmove', (e) => {
-            if (!isSwiping) return;
-            
-            // Empêche le défilement vertical de la page pendant le balayage horizontal du slider.
-            // C'est souvent la clé pour que le swipe fonctionne bien sur mobile.
-            e.preventDefault(); 
-        
-            // Calcule le déplacement du doigt
-            const currentX = e.touches[0].clientX;
-            const diffX = currentX - startX;
-        
-            // Calcule le décalage en pourcentage 
-            const containerWidth = sliderContainer.offsetWidth / totalSlides;
-            const currentOffset = -currentSlide * 100;
-            const dragOffset = (diffX / containerWidth) * 100;
-        
-            // Déplace le conteneur SANS transition (pour le mouvement fluide en temps réel)
-            sliderContainer.style.transition = 'none';
-            sliderContainer.style.transform = `translateX(${currentOffset + dragOffset}%)`;
-        }, { passive: false });
-
-        // 3. Fin du toucher
-        sliderContainer.addEventListener('touchend', (e) => {
-            if (!isSwiping) return;
-
-            const endX = e.changedTouches[0].clientX;
-            const diffX = endX - startX;
-            const swipeThreshold = 50;
-
-            if (diffX > swipeThreshold) {
-                currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
-            } else if (diffX < -swipeThreshold) {
-                currentSlide = (currentSlide + 1) % totalSlides;
-            }
-
-            updateSlider(true);
-            isSwiping = false;
-            startAutoSlide(); // Redémarre le défilement automatique
-        });
-
-        // touchcancel...
-        sliderContainer.addEventListener('touchcancel', () => {
-            if (isSwiping) {
-                updateSlider(true);
-                isSwiping = false;
-            }
-            startAutoSlide(); // Redémarre aussi l'autoslide si le swipe est annulé
-        });
+        // NOTE : La logique de SWIPE MOBILE (touchstart, touchmove, touchend) est
+        // entièrement supprimée ici.
     }
 
     /* ========================================================= */
