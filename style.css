@@ -254,16 +254,16 @@ body {
         color: var(--color-chêne-clair);
     }
 
+
     .hero-slider {
-        overflow: visible !important;
-        /* ❌ CRITIQUE : permet le touch */
-        touch-action: pan-x;
-        /* Autorise swipe horizontal */
+        overflow: hidden !important;
+        overflow-x: hidden !important;
+        touch-action: pan-y !important;
     }
 
     .slider-container {
-        touch-action: pan-x;
-        will-change: transform;
+        /* 3. Retirer les règles de touch-action qui bloquaient le scroll */
+        /* Retirez complètement les lignes : touch-action: pan-x; et will-change: transform; */
     }
 
     /* Affiche le bouton menu */
