@@ -135,7 +135,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.20);
+    background-color: rgba(0, 0, 0, 0.10);
     /* Opacité augmentée */
     z-index: 1;
     /* Assure que le filtre est au-dessus de l'image */
@@ -362,7 +362,9 @@ body {
 .section-title {
     text-align: center;
     color: var(--color-chêne-clair);
-    font-size: 2.5rem;
+    /*--color-bleu-ardoise*/
+    font-size: 2.8rem;
+    font-weight: 800;
     margin-bottom: 60px;
 }
 
@@ -370,6 +372,7 @@ body {
     display: flex;
     align-items: flex-start;
     gap: 50px;
+    margin-top: 20px;
 }
 
 /* Bloc Visuel (Contient le wrapper de la vidéo) */
@@ -433,7 +436,6 @@ body {
     width: 30px;
     height: 30px;
     margin-left: 5px;
-    /* Petit décalage pour le look du triangle */
 }
 
 /* Classe pour cacher le bouton Play une fois la vidéo lancée */
@@ -447,79 +449,76 @@ body {
 .about-text {
     flex: 1;
     color: var(--color-noir-doux);
-    font-size: 1.1rem;
-    line-height: 1.6;
+    font-size: 1.15rem;
+    /* Légèrement plus grand pour la lecture */
+    line-height: 1.7;
 }
 
+/* Amélioration du séparateur vertical */
 .about-text p {
-    margin-bottom: 20px;
-    padding-left: 20px;
-    border-left: 3px solid var(--color-bleu-ardoise);
+    margin-bottom: 25px;
+    /* Augmenter l'espace entre les paragraphes */
+    padding-left: 25px;
+    /* Augmenter le padding */
+    border-left: 5px solid var(--color-bleu-ardoise);
+    /* Rendre le séparateur plus épais et en couleur d'accentuation */
+    color: var(--color-gris-fonce, #444);
+    /* Rendre le texte des paragraphes un peu plus foncé */
 }
 
 .highlight-text {
-    font-weight: bold;
+    font-weight: 800;
+    /* Rendre le mot clé encore plus percutant */
     color: var(--color-bleu-ardoise);
 }
 
 /* Liste des Valeurs Clés */
 .stats-grid {
     display: grid;
-    /* Utilise la syntaxe de votre exemple pour deux colonnes */
     grid-template-columns: 1fr 1fr;
-    align-items: start;
     gap: 30px;
-    /* Espace entre les cartes */
     padding-top: 50px;
-    /* Ajoute un espacement en haut */
+    /* Optionnel : Ajouter un séparateur visuel entre le texte et la grille de stats */
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    margin-top: 30px;
+    padding-top: 30px;
 }
 
 .stat-card-about {
+    /* Style épuré et très visible */
     display: flex;
-    /* Aligne l'icône et le texte verticalement.
-       Votre exemple avait un conflit : align-items: center et align-items: self-start; 
-       Nous choisissons 'self-start' pour un alignement en haut du texte.
-    */
     align-items: self-start;
     gap: 20px;
-    /* Augmente légèrement l'espacement entre l'icône et le texte */
-    padding: 0;
-    /* Supprime le padding pour un look plus épuré */
+    padding: 10px 0;
+    /* Ajouter un petit padding pour mieux encadrer l'info */
 }
 
 .stat-icon-wrapper {
-    /* Conteneur de l'icône : Grand, impactant et de couleur primaire */
     flex-shrink: 0;
-    /* Empêche l'icône de rétrécir */
     color: var(--color-chêne-clair);
-    /* Utilise la couleur d'accent (comme le primaire) */
+    /* Utiliser la couleur principale pour l'impact */
     font-size: 2.5em;
-    /* Grande taille d'icône pour un fort impact */
     line-height: 1;
-    margin-top: 5px;
-    /* Petit ajustement pour aligner visuellement avec le titre */
+    margin-top: 0;
+    /* S'assurer de l'alignement en haut */
 }
 
 .stat-title {
-    /* Titre (Titre du bénéfice) */
-    font-size: 1.2em;
-    /* Légèrement plus grand que votre 1.1em pour la lisibilité */
-    font-weight: 700;
-    color: var(--color-bleu-ardoise);
-    /* Utilise la couleur de texte principale (comme le text-color) */
+    font-size: 1.20em;
+    /* Un peu plus grand pour l'importance */
+    font-weight: 800;
+    color: var(--color-noir-doux);
     margin-bottom: 3px;
-    margin-top: 0;
-    /* Assure l'alignement strict en haut */
-    /* display: flex; est retiré car inutile pour un titre standard */
 }
 
 .stat-description {
-    /* Description (Détail du bénéfice) */
-    font-size: 0.9em;
-    color: var(--color-gris-fonce, #666);
-    /* Utilise un gris ou un fallback */
-    line-height: 1.4;
+    font-size: 1.1em;
+    /* Taille de police claire */
+    color: var(--color-chêne-clair);
+    line-height: 1.1;
+
 }
+
 
 
 /* --- RESPONSIVE POUR LA SECTION À PROPOS --- */
@@ -548,25 +547,34 @@ body {
         /* Remet le cover pour bien remplir, car la hauteur est fixe */
     }
 
+    .about-text {
+        font-size: 1.1rem;
+        /* Réduire légèrement sur mobile */
+    }
+
     .about-text p {
-        padding-left: 0;
-        border-left: none;
+        /* Retirer la bordure verticale sur mobile pour ne pas écraser le texte */
+        border-left: 4px solid var(--color-bleu-ardoise);
+        padding-left: 5px;
+        margin-bottom: 20px;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+        padding-top: 20px;
     }
 
     .section-title {
         font-size: 2rem;
     }
 
-    .stats-grid {
-        /* Passe à une seule colonne pour le mobile */
-        grid-template-columns: 1fr;
-        gap: 20px;
-        padding-top: 30px;
-    }
-
     .stat-icon-wrapper {
         font-size: 2em;
         /* Légèrement réduit sur mobile */
+    }
+
+    .stat-card-about .stat-description {
+        border-left: none;
     }
 }
 
