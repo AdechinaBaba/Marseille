@@ -490,7 +490,6 @@ body {
     align-items: self-start;
     gap: 20px;
     padding: 10px 0;
-    /* Ajouter un petit padding pour mieux encadrer l'info */
 }
 
 .stat-icon-wrapper {
@@ -549,13 +548,12 @@ body {
 
     .about-text {
         font-size: 1.1rem;
-        /* Réduire légèrement sur mobile */
     }
 
     .about-text p {
         /* Retirer la bordure verticale sur mobile pour ne pas écraser le texte */
         border-left: 4px solid var(--color-bleu-ardoise);
-        padding-left: 5px;
+        padding-left: 17px;
         margin-bottom: 20px;
     }
 
@@ -578,55 +576,104 @@ body {
     }
 }
 
-/* --- SÉPARATEUR PARALLAX --- */
+/* --- SÉPARATEUR PARALLAX (VERSION FINALE CORRIGÉE) --- */
 
 .parallax-separator {
-    /* 1. Définition de la hauteur de la section */
-    height: 400px;
-
-    /* 2. Image de fond (Remplacez le chemin par celui de votre image) */
+    height: 300px;
     background-image: url('images/paralax2.jpg');
-
-    /* 3. L'effet Parallax : fixe l'image lors du défilement */
     background-attachment: fixed;
-
-    /* 4. S'assure que l'image couvre toute la zone */
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
 
-    /* Styles pour le contenu texte (optionnel) */
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
+
+    position: relative;
+    z-index: 0;
 }
 
-.parallax-content p {
-    color: var(--color-blanc-pur);
-    /* Texte en blanc pour un bon contraste */
-    font-size: 1rem;
+/* 🛑 NOUS INTRODUISONS UN OVERLAY ICI POUR CONTRÔLER L'APPARITION DU FOND GRIS */
+.parallax-separator::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Couleur très transparente (presque invisible) ou nulle */
+    background-color: transparent;
+    /* Si vous ne voulez absolument aucun gris, utilisez background-color: transparent; */
+    z-index: 1;
+}
+
+.parallax-content {
+    max-width: 800px;
+    padding: 0 20px;
+    background: none;
+    /* Le contenu doit être au-dessus du pseudo-élément ::before */
+    z-index: 2;
+}
+
+.parallax-title {
+    color: var(--color-gris-chaud);
+    font-size: 3.2rem;
+    font-weight: 800;
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);
+    margin-bottom: 15px;
+    line-height: 1.1;
+}
+
+.contact-infoo {
+    margin-bottom: 30px;
+    background: none;
+    padding: 0;
+}
+
+
+.phone-number {
+    color: var(--color-gris-chaud);
+    font-size: 3rem;
     font-weight: 700;
-    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.6);
-    /* Pour que le texte ressorte bien */
-    padding: 20px 40px;
-    background-color: rgba(0, 0, 0, 0.3);
-    /* Légère boîte derrière le texte pour la lisibilité */
-    border-radius: 5px;
+    text-shadow: 0 3px 6px rgba(0, 0, 0, 0.7);
 }
 
 
-/* --- RESPONSIVE : Le Parallax et le Mobile --- */
-/* ATTENTION : L'effet 'fixed' est souvent désactivé ou buggé sur mobile pour des raisons de performance.
-   Nous devons le désactiver pour une expérience stable. */
+
+/* --- RESPONSIVE : Le Parallax et le Mobile (CORRIGÉ POUR LA VISIBILITÉ) --- */
 @media (max-width: 992px) {
     .parallax-separator {
-        /* On retire l'effet Parallax sur les petits écrans */
         background-attachment: scroll;
-        /* On peut réduire légèrement la hauteur sur mobile si nécessaire */
-        height: 300px;
+        height: 240px;
+        /* Rétablit une hauteur fixe simple pour le centrage */
+        padding: 0;
+        /* On utilise le padding du .parallax-content */
+    }
+
+    .parallax-content {
+        padding: 0 15px;
+    }
+
+    .parallax-title {
+        font-size: 1.8rem;
+        margin-bottom: 10px;
+    }
+
+    .contact-infoo {
+        margin-bottom: 15px;
+    }
+
+    .phone-number {
+        font-size: 2rem;
+    }
+
+    .quote {
+        display: none;
     }
 }
+
 
 /* --- SECTION NOS SERVICES (Grille de Cartes) --- */
 
