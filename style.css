@@ -635,12 +635,29 @@ body {
 }
 
 
-.phone-number {
-    color: var(--color-gris-chaud);
+/* Style de l'ancien conteneur (maintenant la DIV parente) */
+/* C'est maintenant le conteneur du lien */
+.phone-number-container {
+    margin-bottom: 30px;
+    background: none;
+    padding: 0;
+}
+
+/* NOUVELLE RÈGLE CRUCIALE : Cible le lien pour annuler le bleu et le soulignement */
+.parallax-phone-link {
+    /* Styles pour le texte lui-même (taille, graisse, ombre) */
+    color: var(--color-blanc-pur) !important;
+    /* Force la couleur blanche, la plus importante */
     font-size: 3rem;
     font-weight: 700;
     text-shadow: 0 3px 6px rgba(0, 0, 0, 0.7);
+
+    /* Annule le style de lien mobile */
     text-decoration: none !important;
+
+    /* Pour annuler un éventuel style en ligne iOS (parfois nécessaire) */
+    -webkit-text-decoration: none !important;
+    -webkit-text-fill-color: var(--color-blanc-pur) !important;
 }
 
 
@@ -668,10 +685,13 @@ body {
         margin-bottom: 15px;
     }
 
-    .phone-number {
-        font-size: 2rem;
-        color: var(--color-gris-chaud);
+    .parallax-phone-link {
+        font-size: 2rem !important;
+        /* Réduction de la taille sur mobile */
+        color: var(--color-blanc-pur) !important;
         text-decoration: none !important;
+        -webkit-text-decoration: none !important;
+        -webkit-text-fill-color: var(--color-blanc-pur) !important;
     }
 
     .quote {
