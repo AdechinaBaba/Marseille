@@ -671,6 +671,7 @@ body {
     .phone-number {
         font-size: 2rem;
         color: var(--color-gris-chaud);
+        text-decoration: none !important;
     }
 
     .quote {
