@@ -67,10 +67,12 @@ body {
     color: var(--color-chêne-clair);
 }
 
+/*
 .phone-number {
     font-weight: bold;
     color: var(--color-chêne-clair);
 }
+    */
 
 .menu-toggle {
     display: none;
@@ -667,6 +669,7 @@ body {
 
     .phone-number {
         font-size: 2rem;
+        color: var(--color-gris-chaud);
     }
 
     .quote {
