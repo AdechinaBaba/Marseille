@@ -349,6 +349,109 @@ body {
     }
 }
 
+
+/*  Overlap   */
+
+.overlap-card-container {
+    position: relative;
+    max-width: 900px;
+    margin: -70px auto 40px;
+    /* Le -60px crée la superposition sur le slider */
+    padding: 0 20px;
+    z-index: 100;
+    /* Pour passer devant les autres sections */
+}
+
+.intro-card {
+    background: #ffffff;
+    border-radius: 15px;
+    padding: 80px 50px;
+    text-align: center;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    /* Ombre douce comme sur la capture */
+}
+
+.location-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    /* Couleur bois/doré */
+    font-weight: 600;
+    margin-bottom: 20px;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+}
+
+.location-badge i {
+    color: #ff9800;
+    font-size: 1.1rem;
+}
+
+.location-badge .fa-solid .fa-location-dot {
+
+    color: #181818;
+}
+
+.typing-title {
+    font-size: 3.25rem;
+    color: #2c3e50;
+    margin-bottom: 15px;
+}
+
+#typing-text {
+    color: #e8a757;
+    font-weight: 700;
+}
+
+.cursor {
+    display: inline-block;
+    width: 3px;
+    height: 1.2em;
+    background-color: #e8a757;
+    margin-left: 5px;
+    vertical-align: middle;
+    animation: blink 0.7s infinite;
+}
+
+.card-description1 {
+    color: #666;
+    font-size: 1.15rem;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+@keyframes blink {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Ajustement Mobile */
+@media (max-width: 768px) {
+    .overlap-card-container {
+        margin-top: -40px;
+    }
+
+    .intro-card {
+        padding: 30px 20px;
+    }
+
+    .typing-title {
+        font-size: 1.5rem;
+    }
+}
+
+
+
+
 /* --- SECTION À PROPOS --- */
 
 #apropos .container .section-title {
@@ -357,7 +460,8 @@ body {
 
 .about-section {
     padding: 50px 5%;
-    background-color: var(--color-gris-chaud);
+    background-color: #ffffff;
+    /*var(--color-gris-chaud)*/
 }
 
 .container {
@@ -1490,5 +1594,65 @@ textarea {
     .gallery-item img {
         height: 250px;
         /* Réduire légèrement la hauteur sur mobile */
+    }
+}
+
+
+.services-intro {
+    padding: 60px 0;
+    background-color: #f9f9f9;
+    /* Un gris très léger pour détacher du blanc */
+    border-bottom: 1px solid #eee;
+}
+
+.services-intro-grid {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+    text-align: center;
+}
+
+.service-intro-card {
+    flex: 1;
+    padding: 20px;
+    transition: transform 0.3s ease;
+}
+
+.service-intro-card:hover {
+    transform: translateY(-10px);
+    /* Petit effet de lévitation au survol */
+}
+
+.service-intro-card .icon-box {
+    font-size: 2.5rem;
+    color: #b08d57;
+    /* Couleur dorée/bois pour les icônes */
+    margin-bottom: 20px;
+}
+
+.service-intro-card h3 {
+    font-size: 1.4rem;
+    margin-bottom: 15px;
+    color: #333;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.service-intro-card p {
+    font-size: 1rem;
+    color: #666;
+    line-height: 1.6;
+}
+
+/* --- Responsive Mobile --- */
+@media (max-width: 768px) {
+    .services-intro-grid {
+        flex-direction: column;
+        gap: 40px;
+    }
+
+    .services-intro {
+        padding: 40px 20px;
     }
 }

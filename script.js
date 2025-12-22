@@ -217,4 +217,45 @@ document.addEventListener('DOMContentLoaded', () => {
         // ou de les laisser au "toucher" si vous ne voulez pas d'une logique JS trop lourde.
     }
 
+
+    /* ========================================================= */
+    /* 5. TYPING EFFECT (Correction) */
+    /* ========================================================= */
+    const words = ["Menuiserie & Ébénisterie", "Meubles sur Mesure", "Cuisines Équipée", "Mezzanines & Claustras", "Aménagement Intérieurs"];
+    let wordIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    const typingElement = document.getElementById("typing-text");
+
+    function type() {
+        // Sécurité : si l'élément n'existe pas sur la page, on arrête la fonction
+        if (!typingElement) return;
+
+        const currentWord = words[wordIndex];
+
+        if (isDeleting) {
+            typingElement.textContent = currentWord.substring(0, charIndex - 1);
+            charIndex--;
+        } else {
+            typingElement.textContent = currentWord.substring(0, charIndex + 1);
+            charIndex++;
+        }
+
+        let typeSpeed = isDeleting ? 100 : 200;
+
+        if (!isDeleting && charIndex === currentWord.length) {
+            isDeleting = true;
+            typeSpeed = 2000; // Pause quand le mot est fini
+        } else if (isDeleting && charIndex === 0) {
+            isDeleting = false;
+            wordIndex = (wordIndex + 1) % words.length;
+            typeSpeed = 500;
+        }
+
+        setTimeout(type, typeSpeed);
+    }
+
+    // ON LANCE DIRECTEMENT (car on est déjà dans le DOMContentLoaded global)
+    type();
+
 });
