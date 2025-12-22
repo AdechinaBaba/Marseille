@@ -355,7 +355,7 @@ body {
 .overlap-card-container {
     position: relative;
     max-width: 900px;
-    margin: -80px auto 40px;
+    margin: -70px auto 40px;
     /* Le -60px crée la superposition sur le slider */
     padding: 0 20px;
     z-index: 100;
@@ -393,7 +393,7 @@ body {
 }
 
 .typing-title {
-    font-size: 3.25rem;
+    font-size: 2.5rem;
     color: #2c3e50;
     margin-bottom: 15px;
 }
@@ -437,7 +437,7 @@ body {
 /* Ajustement Mobile */
 @media (max-width: 768px) {
     .overlap-card-container {
-        margin-top: -40px;
+        margin-top: -60px;
     }
 
     .intro-card {
@@ -445,7 +445,7 @@ body {
     }
 
     .typing-title {
-        font-size: 1.5rem;
+        font-size: 1.6rem;
     }
 }
 
@@ -459,7 +459,7 @@ body {
 }
 
 .about-section {
-    padding: 50px 5%;
+    padding: 35px 5%;
     background-color: #ffffff;
     /*var(--color-gris-chaud)*/
 }
